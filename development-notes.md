@@ -91,6 +91,6 @@ MVP included basic error messaging and basic user friendly confirmation of actio
 
 Next step is to add records and dates
 
-<!-- finish refactoring out the record class
+- added a record class and a display formatter
 
-refactor out a terminal class which does the displaying -->
+refactor out a terminal class which does the displaying

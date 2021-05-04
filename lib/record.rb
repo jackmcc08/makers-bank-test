@@ -7,16 +7,20 @@ class Record
   end
 
   def display_string
-    if @type == "deposit"
-      "#{@date} || #{display(@amount)} || || #{display(@balance)}"
-    elsif @type == "withdraw"
-      "#{@date} || || #{display(@amount)} || #{display(@balance)}"
-    end
+    amount = (@type == "deposit" ?
+      " #{display(@amount)} || " :
+      " || #{display(@amount)} ")
+
+    "#{date_format(@date)} ||#{amount}|| #{display(@balance)}"
   end
 
   private
 
   def display(value)
     sprintf('%.2f', value)
+  end
+
+  def date_format(date)
+    date.strftime("%d/%m/%Y")
   end
 end

@@ -1,6 +1,8 @@
+require 'date'
+
 class Account
   def initialize(record_class = Record)
-    @date = "01/01/2012"
+    @date = Date.new(2012,1,1)
     @balance = 0
     @record_class = record_class
     @records = []

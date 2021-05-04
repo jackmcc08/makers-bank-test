@@ -118,13 +118,13 @@ describe Account do
     STATEMENT_TWO =
       %{date || credit || debit || balance\n01/01/2012 || || 1000.00 || 1000.00\n01/01/2012 || 2000.00 || || 2000.00}
 
-    context 'At the beginning the statement displays nothing but the headers' do
+    context 'with no deposits or withdrawals' do
       expected_output = STATEMENT_ZERO
 
       it { expect(test_account.statement).to eq expected_output }
     end
 
-    context 'After one deposit it displays the records' do
+    context 'After one deposit' do
       expected_output = STATEMENT_ONE
 
       it {
@@ -134,7 +134,7 @@ describe Account do
       }
     end
 
-    context 'After one deposit and one withdrawal it displays the records' do
+    context 'After one deposit and one withdrawal' do
       expected_output = STATEMENT_TWO
 
       it {
