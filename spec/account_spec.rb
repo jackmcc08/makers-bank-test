@@ -27,5 +27,12 @@ describe Account do
 
       expect(test_account.deposit(input)).to eq expected_output
     end
+
+    it 'does not allow you to deposit a negative amount' do
+      input = -1500.00
+      expected_output = "You cannot deposit a negative amount."
+
+      expect(test_account.deposit(input)).to eq expected_output
+    end
   end
 end

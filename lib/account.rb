@@ -8,6 +8,8 @@ class Account
   end
 
   def deposit(amount)
+    return "You cannot deposit a negative amount." if amount.negative?
+
     add_balance(amount)
 
     "You have deposited £#{display(amount)}."
