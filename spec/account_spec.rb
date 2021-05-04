@@ -18,6 +18,16 @@ describe Account do
         expect(test_account.see_balance).to eq expected_output
       }
     end
+
+    context 'after depositing £1500 and withdrawing £500' do
+      expected_output = "Account balance: £1000.00."
+
+      it {
+        test_account.deposit(1500)
+        test_account.withdraw(500)
+        expect(test_account.see_balance).to eq expected_output
+      }
+    end
   end
 
   describe '#deposit' do
@@ -61,6 +71,13 @@ describe Account do
     it 'allows you to withdraw money from your account' do
       input = 500
       expected_output = "You have withdrawn £500.00."
+
+      expect(test_account.withdraw(input)).to eq expected_output
+    end
+
+    it 'does not allow you to withdraw money if it will take your balance negative or your account is negative' do
+      input = 2500
+      expected_output = "You do not have enough money in your account."
 
       expect(test_account.withdraw(input)).to eq expected_output
     end

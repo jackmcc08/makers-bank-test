@@ -16,6 +16,10 @@ class Account
   end
 
   def withdraw(amount)
+    return "You do not have enough money in your account." if @balance < amount
+
+    @balance -= amount
+
     "You have withdrawn £#{display(amount)}."
   end
 
