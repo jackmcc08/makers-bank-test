@@ -1,11 +1,14 @@
 require 'date'
+require 'record'
+require 'bank_terminal'
 
 class Account
-  def initialize(record_class = Record)
+  def initialize(record_class = Record, terminal = BankTerminal.new)
     @date = Date.new(2012,1,1)
     @balance = 0
     @record_class = record_class
     @records = []
+    @terminal = terminal
   end
 
   def see_balance
@@ -13,12 +16,7 @@ class Account
   end
 
   def statement
-    result = ["date || credit || debit || balance"]
-    return result[0] if @records.empty?
-
-    @records.reverse.each { |entry| result << entry.display_string }
-
-    result.join("\n")
+    @terminal.display_statement(@records)
   end
 
   def deposit(amount)

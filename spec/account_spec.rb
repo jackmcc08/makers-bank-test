@@ -1,9 +1,10 @@
 require 'account'
 
 describe Account do
-  let(:test_account) { Account.new(test_record_class) }
+  let(:test_account) { Account.new(test_record_class, test_terminal) }
   let(:test_record) { instance_double("Record")}
   let(:test_record_class) { class_double("Record", new: test_record) }
+  let(:test_terminal) { instance_double('Terminal')}
 
   describe '#see_balance' do
     context 'starting account has £0.00 balance by default' do
@@ -121,15 +122,18 @@ describe Account do
     context 'with no deposits or withdrawals' do
       expected_output = STATEMENT_ZERO
 
-      it { expect(test_account.statement).to eq expected_output }
+      it {
+        allow(test_terminal).to receive(:display_statement).and_return STATEMENT_ZERO
+
+        expect(test_account.statement).to eq expected_output
+      }
     end
 
     context 'After one deposit' do
       expected_output = STATEMENT_ONE
 
       it {
-        allow(test_record).to receive(:display_string).and_return("01/01/2012 || 2000.00 || || 2000.00")
-        test_account.deposit(2000)
+        allow(test_terminal).to receive(:display_statement).and_return STATEMENT_ONE
         expect(test_account.statement).to eq expected_output
       }
     end
@@ -138,9 +142,7 @@ describe Account do
       expected_output = STATEMENT_TWO
 
       it {
-        allow(test_record).to receive(:display_string).and_return("01/01/2012 || || 1000.00 || 1000.00", "01/01/2012 || 2000.00 || || 2000.00")
-        test_account.deposit(2000)
-        test_account.withdraw(1000)
+        allow(test_terminal).to receive(:display_statement).and_return STATEMENT_TWO
         expect(test_account.statement).to eq expected_output
       }
     end
