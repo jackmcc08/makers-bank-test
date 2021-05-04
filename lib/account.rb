@@ -38,6 +38,10 @@ class Account
     "You have withdrawn £#{display(amount)}."
   end
 
+  def set_date(year, month, day)
+    @date = Date.new(year, month, day)
+  end
+
   private
 
   def display(value)

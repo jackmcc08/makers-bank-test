@@ -145,4 +145,10 @@ describe Account do
       }
     end
   end
+
+  describe '#set_date' do
+    it 'sets the date on the account' do
+      expect(test_account.set_date(2012,1,1)).to be_instance_of Date
+    end
+  end
 end
