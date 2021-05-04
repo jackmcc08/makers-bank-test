@@ -51,4 +51,12 @@ describe BankTerminal do
       expect(test_terminal.action_confirmation(1000, "withdraw")).to eq expected_output
     end
   end
+
+  describe '#display_balance' do
+    it 'after one deposit' do
+      expected_output = "Account balance: £1500.00."
+
+      expect(test_terminal.display_balance(1500)).to eq expected_output
+    end
+  end
 end

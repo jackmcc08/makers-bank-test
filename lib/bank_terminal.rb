@@ -15,6 +15,10 @@ class BankTerminal
     "You have #{type_display} £#{display(amount)}."
   end
 
+  def display_balance(amount)
+    "Account balance: £#{display(amount)}."
+  end
+
   private
 
   def display(value)
