@@ -82,4 +82,11 @@ Plan is to develop the app through TDD, working on the above user stories.
 I will work to develop the MVP initially (deposit, withdraw, balance). And then proceed to add additional features through TDD.
 
 
-1.
+#### Completed MVP
+Added deposit, withdraw and see_balance methods to the Account class.
+
+As part of MVP, added in error catching for the inputs and a lot of private methods to keep code DRY and SRP'd.
+
+MVP included basic error messaging and basic user friendly confirmation of action messages.
+
+Next step is to add records and dates
