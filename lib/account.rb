@@ -4,7 +4,15 @@ class Account
   end
 
   def see_balance
-    balance = (@balance.nil? ? "0.00" : @balance)
-    "Account balance: £#{balance}."
+    "Account balance: £#{balance_display}."
+  end
+
+  # def deposit(amount)
+  # end
+
+  private
+
+  def balance_display
+    @balance.nil? ? "0.00" : @balance
   end
 end
