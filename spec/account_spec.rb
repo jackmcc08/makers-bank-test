@@ -118,39 +118,39 @@ describe Account do
   end
 
   describe '#statement' do
-    STATEMENT_ZERO = "date || credit || debit || balance"
+    @statement_zero = "date || credit || debit || balance"
 
-    STATEMENT_ONE =
+    @statement_one =
       %{date || credit || debit || balance\n01/01/2012 || 2000.00 || || 2000.00}
 
-    STATEMENT_TWO =
+    @statement_two =
       %{date || credit || debit || balance\n01/01/2012 || || 1000.00 || 1000.00\n01/01/2012 || 2000.00 || || 2000.00}
 
     context 'with no deposits or withdrawals' do
-      expected_output = STATEMENT_ZERO
+      expected_output = @statement_zero
 
       it {
-        allow(test_terminal).to receive(:display_statement).and_return STATEMENT_ZERO
+        allow(test_terminal).to receive(:display_statement).and_return @statement_zero
 
         expect(test_account.statement).to eq expected_output
       }
     end
 
     context 'After one deposit' do
-      expected_output = STATEMENT_ONE
+      expected_output = @statement_one
 
       it {
-        allow(test_terminal).to receive(:display_statement).and_return STATEMENT_ONE
+        allow(test_terminal).to receive(:display_statement).and_return @statement_one
 
         expect(test_account.statement).to eq expected_output
       }
     end
 
     context 'After one deposit and one withdrawal' do
-      expected_output = STATEMENT_TWO
+      expected_output = @statement_two
 
       it {
-        allow(test_terminal).to receive(:display_statement).and_return STATEMENT_TWO
+        allow(test_terminal).to receive(:display_statement).and_return @statement_two
 
         expect(test_account.statement).to eq expected_output
       }

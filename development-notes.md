@@ -93,4 +93,4 @@ Next step is to add records and dates
 
 - added a record class and a display formatter
 
-refactor out a terminal class which does the displaying
+- added a terminal class which provides the display strings and formatting
