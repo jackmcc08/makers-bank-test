@@ -7,8 +7,9 @@ class Account
     "Account balance: £#{balance_display}."
   end
 
-  # def deposit(amount)
-  # end
+  def deposit(amount)
+    "You have deposited £#{sprintf('%.2f', amount)}."
+  end
 
   private
 
