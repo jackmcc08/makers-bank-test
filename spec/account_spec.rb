@@ -1,7 +1,9 @@
 require 'account'
 
 describe Account do
-  let(:test_account) { Account.new }
+  let(:test_account) { Account.new(test_record_class) }
+  let(:test_record) { instance_double("Record")}
+  let(:test_record_class) { class_double("Record", new: test_record) }
 
   describe '#see_balance' do
     context 'starting account has £0.00 balance by default' do
@@ -126,6 +128,7 @@ describe Account do
       expected_output = STATEMENT_ONE
 
       it {
+        allow(test_record).to receive(:display_string).and_return("01/01/2012 || 2000.00 || || 2000.00")
         test_account.deposit(2000)
         expect(test_account.statement).to eq expected_output
       }
@@ -135,6 +138,7 @@ describe Account do
       expected_output = STATEMENT_TWO
 
       it {
+        allow(test_record).to receive(:display_string).and_return("01/01/2012 || || 1000.00 || 1000.00", "01/01/2012 || 2000.00 || || 2000.00")
         test_account.deposit(2000)
         test_account.withdraw(1000)
         expect(test_account.statement).to eq expected_output
