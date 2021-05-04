@@ -10,7 +10,7 @@ class BankTerminal
     result.join("\n")
   end
 
-  def action_confirmation(type, amount)
+  def action_confirmation(amount, type)
     type_display = (type == "deposit" ? "deposited" : "withdrawn")
     "You have #{type_display} £#{display(amount)}."
   end

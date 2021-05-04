@@ -2,9 +2,8 @@ require 'bank_terminal'
 
 describe BankTerminal do
   let(:test_terminal) { BankTerminal.new }
-  let(:test_record_1) { instance_double('Record', display_string: "01/01/2012 || 2000.00 || || 2000.00")}
-  let(:test_record_2) { instance_double('Record', display_string: "01/01/2012 || || 1000.00 || 1000.00")}
-
+  let(:test_record_1) { instance_double('Record', display_string: "01/01/2012 || 2000.00 || || 2000.00") }
+  let(:test_record_2) { instance_double('Record', display_string: "01/01/2012 || || 1000.00 || 1000.00") }
 
   describe '#display_statement' do
     it 'After one deposit and one withdrawal' do
@@ -43,13 +42,13 @@ describe BankTerminal do
     it 'provides a confirmation of deposit' do
       expected_output = "You have deposited £1000.00."
 
-      expect(test_terminal.action_confirmation("deposit", 1000)).to eq expected_output
+      expect(test_terminal.action_confirmation(1000, "deposit")).to eq expected_output
     end
 
     it 'provides confirmation of withdraw' do
       expected_output = "You have withdrawn £1000.00."
 
-      expect(test_terminal.action_confirmation("withdraw", 1000)).to eq expected_output
+      expect(test_terminal.action_confirmation(1000, "withdraw")).to eq expected_output
     end
   end
 end

@@ -4,7 +4,7 @@ require 'bank_terminal'
 
 class Account
   def initialize(record_class = Record, terminal = BankTerminal.new)
-    @date = Date.new(2012,1,1)
+    @date = Date.new(2012, 1, 1)
     @balance = 0
     @record_class = record_class
     @records = []
@@ -20,20 +20,22 @@ class Account
   end
 
   def deposit(amount)
-    return invalid_message(amount, "deposit") if input_invalid?(amount, "deposit")
+    type = "deposit"
+    return invalid_message(amount, type) if input_invalid?(amount, type)
 
-    record_action(amount, "deposit")
+    record_action(amount, type)
 
-    "You have deposited £#{display(amount)}."
+    @terminal.action_confirmation(amount, type)
   end
 
   def withdraw(amount)
-    return invalid_message(amount, "withdraw") if input_invalid?(amount, "withdraw")
+    type = "withdraw"
+    return invalid_message(amount, type) if input_invalid?(amount, type)
     return "You do not have enough money in your account." unless enough_balance?(amount)
 
-    record_action(amount, "withdraw")
+    record_action(amount, type)
 
-    "You have withdrawn £#{display(amount)}."
+    @terminal.action_confirmation(amount, type)
   end
 
   def set_date(year, month, day)
@@ -57,7 +59,7 @@ class Account
     @balance >= amount
   end
 
-  def input_invalid?(value, type)
+  def input_invalid?(value, _type)
     return true unless value.is_a? Numeric
     return true if value.negative?
     return true if value.zero?

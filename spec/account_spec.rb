@@ -2,9 +2,9 @@ require 'account'
 
 describe Account do
   let(:test_account) { Account.new(test_record_class, test_terminal) }
-  let(:test_record) { instance_double("Record")}
+  let(:test_record) { instance_double("Record") }
   let(:test_record_class) { class_double("Record", new: test_record) }
-  let(:test_terminal) { instance_double('Terminal')}
+  let(:test_terminal) { instance_double('Terminal', action_confirmation: "") }
 
   describe '#see_balance' do
     context 'starting account has £0.00 balance by default' do
@@ -37,6 +37,7 @@ describe Account do
     it 'allows you to depost a positive amount into your account' do
       input = 1500.00
       expected_output = "You have deposited £1500.00."
+      allow(test_terminal).to receive(:action_confirmation).and_return "You have deposited £1500.00."
 
       expect(test_account.deposit(input)).to eq expected_output
     end
@@ -74,6 +75,8 @@ describe Account do
     it 'allows you to withdraw money from your account' do
       input = 500
       expected_output = "You have withdrawn £500.00."
+
+      allow(test_terminal).to receive(:action_confirmation).and_return "You have withdrawn £500.00."
 
       expect(test_account.withdraw(input)).to eq expected_output
     end
@@ -144,7 +147,7 @@ describe Account do
 
       it {
         allow(test_terminal).to receive(:display_statement).and_return STATEMENT_TWO
-        
+
         expect(test_account.statement).to eq expected_output
       }
     end
@@ -152,7 +155,7 @@ describe Account do
 
   describe '#set_date' do
     it 'sets the date on the account' do
-      expect(test_account.set_date(2012,1,1)).to be_instance_of Date
+      expect(test_account.set_date(2012, 1, 1)).to be_instance_of Date
     end
   end
 end
