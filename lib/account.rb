@@ -8,7 +8,7 @@ class Account
   end
 
   def deposit(amount)
-    return invalid_message(amount) if input_valid?(amount)
+    return invalid_message(amount, "deposit") if input_invalid?(amount)
 
     add_balance(amount)
 
@@ -16,6 +16,8 @@ class Account
   end
 
   def withdraw(amount)
+    return invalid_message(amount, "withdraw") if input_invalid?(amount)
+    
     return "You do not have enough money in your account." if @balance < amount
 
     @balance -= amount
@@ -36,7 +38,7 @@ class Account
     @balance += value
   end
 
-  def input_valid?(value)
+  def input_invalid?(value)
     return true unless value.is_a? Numeric
     return true if value.negative?
     return true if value.zero?
@@ -44,10 +46,10 @@ class Account
     false
   end
 
-  def invalid_message(value)
-    return "Incorrect input detected. Please deposit a positive numeric value." unless
+  def invalid_message(value, type)
+    return "Incorrect input detected. Please #{type} a positive numeric value." unless
     value.is_a? Numeric
-    return "You cannot deposit a negative amount." if value.negative?
-    return "You cannot deposit a zero amount." if value.zero?
+    return "You cannot #{type} a negative amount." if value.negative?
+    return "You cannot #{type} a zero amount." if value.zero?
   end
 end

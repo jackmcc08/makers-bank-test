@@ -81,5 +81,29 @@ describe Account do
 
       expect(test_account.withdraw(input)).to eq expected_output
     end
+
+    it 'does not allow you to withdraw a negative amount' do
+      input = -10
+      expected_output = "You cannot withdraw a negative amount."
+
+      expect(test_account.withdraw(input)).to eq expected_output
+    end
+
+    it 'does not allow you to withdraw a zero amount' do
+      input = 0
+      expected_output = "You cannot withdraw a zero amount."
+
+      expect(test_account.withdraw(input)).to eq expected_output
+    end
+
+    it 'rejects a non-numeric input amount' do
+      input = "100"
+      expected_output = "Incorrect input detected. Please withdraw a positive numeric value."
+
+      expect(test_account.withdraw(input)).to eq expected_output
+
+      input = ['111']
+      expect(test_account.withdraw(input)).to eq expected_output
+    end
   end
 end
