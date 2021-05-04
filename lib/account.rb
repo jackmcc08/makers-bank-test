@@ -1,6 +1,6 @@
 class Account
   def new
-    @balance = 0.00
+    @balance = 0
   end
 
   def see_balance
@@ -8,6 +8,12 @@ class Account
   end
 
   def deposit(amount)
+    if @balance.nil?
+      @balance = amount
+    else
+      @balance += amount
+    end
+
     "You have deposited £#{display(amount)}."
   end
 
