@@ -34,5 +34,12 @@ describe Account do
 
       expect(test_account.deposit(input)).to eq expected_output
     end
+
+    it 'does not allow you to deposit a zero amount' do
+      input = 0
+      expected_output = "You cannot deposit a zero amount."
+
+      expect(test_account.deposit(input)).to eq expected_output
+    end
   end
 end

@@ -9,6 +9,7 @@ class Account
 
   def deposit(amount)
     return "You cannot deposit a negative amount." if amount.negative?
+    return "You cannot deposit a zero amount." if amount.zero?
 
     add_balance(amount)
 
