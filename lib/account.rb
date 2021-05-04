@@ -9,12 +9,12 @@ class Account
   end
 
   def statement
-    result = "date || credit || debit || balance"
-    return result if @records.nil?
+    result = ["date || credit || debit || balance"]
+    return result[0] if @records.empty?
 
-    @records.each { |entry| result.push(entry) }
+    @records.each { |entry| result << entry }
 
-    result
+    result.join("\n")
   end
 
   def deposit(amount)
@@ -38,18 +38,14 @@ class Account
   private
 
   def display(value)
-    # value = 0 if value.nil?
     sprintf('%.2f', value)
   end
 
   def add_balance(value)
-    # return  if @balance.nil?
-    #
-    # @balance += value
     @balance += value
 
 
-    @records << "01/01/2012 || #{display(value)} ||  || #{display(@balance)}"
+    @records << "01/01/2012 || #{display(value)} || || #{display(@balance)}"
   end
 
   def input_invalid?(value)

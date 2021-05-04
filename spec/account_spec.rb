@@ -113,6 +113,9 @@ describe Account do
     STATEMENT_ONE =
       %{date || credit || debit || balance\n01/01/2012 || 2000.00 || || 2000.00}
 
+    STATEMENT_TWO =
+      %{date || credit || debit || balance\n01/01/2012 || || 1000.00 || 1000.00\n01/01/2012 || 2000.00 || || 2000.00}
+
     context 'At the beginning the statement displays nothing but the headers' do
       expected_output = STATEMENT_ZERO
 
