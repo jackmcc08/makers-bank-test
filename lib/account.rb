@@ -4,16 +4,17 @@ class Account
   end
 
   def see_balance
-    "Account balance: £#{balance_display}."
+    "Account balance: £#{display(@balance)}."
   end
 
   def deposit(amount)
-    "You have deposited £#{sprintf('%.2f', amount)}."
+    "You have deposited £#{display(amount)}."
   end
 
   private
 
-  def balance_display
-    @balance.nil? ? "0.00" : @balance
+  def display(value)
+    value = 0 if value.nil?
+    sprintf('%.2f', value)
   end
 end
