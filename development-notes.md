@@ -90,3 +90,7 @@ As part of MVP, added in error catching for the inputs and a lot of private meth
 MVP included basic error messaging and basic user friendly confirmation of action messages.
 
 Next step is to add records and dates
+
+<!-- finish refactoring out the record class
+
+refactor out a terminal class which does the displaying -->

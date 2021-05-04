@@ -14,7 +14,7 @@ class Account
     result = ["date || credit || debit || balance"]
     return result[0] if @records.empty?
 
-    @records.reverse.each { |entry| result << entry }
+    @records.reverse.each { |entry| result << entry.display_string }
 
     result.join("\n")
   end
@@ -33,8 +33,6 @@ class Account
     return "You do not have enough money in your account." if @balance < amount
 
     record_action(amount, "withdraw")
-    # @balance -= amount
-    # @records << "01/01/2012 || || #{display(amount)} || #{display(@balance)}"
 
     "You have withdrawn £#{display(amount)}."
   end
@@ -48,18 +46,10 @@ class Account
   def record_action(amount, type)
     if type == "deposit"
       @balance += amount
-      @records << @record_class.new(amount, type, @date, @balance)
     elsif type == "withdraw"
       @balance -= amount
-      @records << @record_class.new(amount, type, @date, @balance)
     end
-  end
-
-  def add_balance(value)
-    @balance += value
-
-
-    @records << "01/01/2012 || #{display(value)} || || #{display(@balance)}"
+    @records << @record_class.new(amount, type, @date, @balance)
   end
 
   def input_invalid?(value)
