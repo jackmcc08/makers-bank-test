@@ -7,6 +7,10 @@ class Account
     "Account balance: £#{display(@balance)}."
   end
 
+  def statement
+    "date || credit || debit || balance"
+  end
+
   def deposit(amount)
     return invalid_message(amount, "deposit") if input_invalid?(amount)
 
@@ -17,7 +21,7 @@ class Account
 
   def withdraw(amount)
     return invalid_message(amount, "withdraw") if input_invalid?(amount)
-    
+
     return "You do not have enough money in your account." if @balance < amount
 
     @balance -= amount

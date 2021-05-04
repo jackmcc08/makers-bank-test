@@ -106,4 +106,29 @@ describe Account do
       expect(test_account.withdraw(input)).to eq expected_output
     end
   end
+
+  describe '#statement' do
+    STATEMENT_ZERO = "date || credit || debit || balance"
+
+    STATEMENT_ONE =
+      "date || credit || debit || balance
+      10/01/2012 || || 1000.00 || 1000.00
+      10/01/2012 || 2000.00 || || 2000.00"
+
+    context 'At the beginning the statement displays nothing but the headers' do
+      expected_output = STATEMENT_ZERO
+
+      it{ expect(test_account.statement).to eq expected_output }
+    end
+
+    context 'After one deposit and withdrawals it displays the records' do
+      expected_output = STATEMENT_ONE
+
+      it {
+        test_account.deposit(2000)
+        test_account.withdraw(1000)
+        expect(test_account.statement).to eq expected_output
+      }
+    end
+  end
 end
