@@ -20,17 +20,16 @@ class Account
   end
 
   def deposit(amount)
-    return invalid_message(amount, "deposit") if input_invalid?(amount)
+    return invalid_message(amount, "deposit") if input_invalid?(amount, "deposit")
 
-    # add_balance(amount)
     record_action(amount, "deposit")
 
     "You have deposited £#{display(amount)}."
   end
 
   def withdraw(amount)
-    return invalid_message(amount, "withdraw") if input_invalid?(amount)
-    return "You do not have enough money in your account." if @balance < amount
+    return invalid_message(amount, "withdraw") if input_invalid?(amount, "withdraw")
+    return "You do not have enough money in your account." unless enough_balance?(amount)
 
     record_action(amount, "withdraw")
 
@@ -44,15 +43,17 @@ class Account
   end
 
   def record_action(amount, type)
-    if type == "deposit"
-      @balance += amount
-    elsif type == "withdraw"
-      @balance -= amount
-    end
+    balance_adjust = (type == "withdraw" ? amount * -1 : amount)
+    @balance += balance_adjust
+
     @records << @record_class.new(amount, type, @date, @balance)
   end
 
-  def input_invalid?(value)
+  def enough_balance?(amount)
+    @balance >= amount
+  end
+
+  def input_invalid?(value, type)
     return true unless value.is_a? Numeric
     return true if value.negative?
     return true if value.zero?
