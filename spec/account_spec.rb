@@ -130,5 +130,15 @@ describe Account do
         expect(test_account.statement).to eq expected_output
       }
     end
+
+    context 'After one deposit and one withdrawal it displays the records' do
+      expected_output = STATEMENT_TWO
+
+      it {
+        test_account.deposit(2000)
+        test_account.withdraw(1000)
+        expect(test_account.statement).to eq expected_output
+      }
+    end
   end
 end

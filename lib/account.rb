@@ -12,7 +12,7 @@ class Account
     result = ["date || credit || debit || balance"]
     return result[0] if @records.empty?
 
-    @records.each { |entry| result << entry }
+    @records.reverse.each { |entry| result << entry }
 
     result.join("\n")
   end
@@ -31,6 +31,7 @@ class Account
     return "You do not have enough money in your account." if @balance < amount
 
     @balance -= amount
+    @records << "01/01/2012 || || #{display(amount)} || #{display(@balance)}"
 
     "You have withdrawn £#{display(amount)}."
   end
