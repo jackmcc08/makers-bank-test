@@ -8,11 +8,7 @@ class Account
   end
 
   def deposit(amount)
-    if @balance.nil?
-      @balance = amount
-    else
-      @balance += amount
-    end
+    add_balance(amount)
 
     "You have deposited £#{display(amount)}."
   end
@@ -22,5 +18,11 @@ class Account
   def display(value)
     value = 0 if value.nil?
     sprintf('%.2f', value)
+  end
+
+  def add_balance(value)
+    return @balance = value if @balance.nil?
+
+    @balance += value
   end
 end
