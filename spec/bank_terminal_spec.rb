@@ -38,4 +38,18 @@ describe BankTerminal do
     STATEMENT_TWO =
       %{date || credit || debit || balance\n01/01/2012 || || 1000.00 || 1000.00\n01/01/2012 || 2000.00 || || 2000.00}
   end
+
+  describe '#action_confirmation' do
+    it 'provides a confirmation of deposit' do
+      expected_output = "You have deposited £1000.00."
+
+      expect(test_terminal.action_confirmation("deposit", 1000)).to eq expected_output
+    end
+
+    it 'provides confirmation of withdraw' do
+      expected_output = "You have withdrawn £1000.00."
+
+      expect(test_terminal.action_confirmation("withdraw", 1000)).to eq expected_output
+    end
+  end
 end

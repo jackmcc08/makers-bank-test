@@ -134,6 +134,7 @@ describe Account do
 
       it {
         allow(test_terminal).to receive(:display_statement).and_return STATEMENT_ONE
+
         expect(test_account.statement).to eq expected_output
       }
     end
@@ -143,6 +144,7 @@ describe Account do
 
       it {
         allow(test_terminal).to receive(:display_statement).and_return STATEMENT_TWO
+        
         expect(test_account.statement).to eq expected_output
       }
     end
