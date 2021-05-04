@@ -69,10 +69,11 @@ Potentially something around dates
 
 MVP table
 
+Balance || Account balance: £0.00
 Deposit 1500 || You have deposited £1500.00.
 Withdraw 500 || You have withdrawn £500.00.
 Deposit 50.50 || You have deposited £50.50.
-Balance || You have an account balance of £1050.50.
+Balance || Account balance: £1050.50.
 
 
 ### Development Plan
@@ -81,4 +82,4 @@ Plan is to develop the app through TDD, working on the above user stories.
 I will work to develop the MVP initially (deposit, withdraw, balance). And then proceed to add additional features through TDD.
 
 
-1. 
+1.
