@@ -10,14 +10,18 @@ describe Account do
     context 'starting account has £0.00 balance by default' do
       expected_output = "Account balance: £0.00."
 
-      it { expect(test_account.see_balance).to eq expected_output }
+      it {
+        allow(test_terminal).to receive(:display_balance).and_return "Account balance: £0.00."
+        expect(test_account.see_balance).to eq expected_output
+      }
     end
 
     context 'after depositing £1500' do
       expected_output = "Account balance: £1500.00."
 
       it {
-        test_account.deposit(1500)
+        allow(test_terminal).to receive(:display_balance).and_return "Account balance: £1500.00."
+
         expect(test_account.see_balance).to eq expected_output
       }
     end
@@ -26,8 +30,8 @@ describe Account do
       expected_output = "Account balance: £1000.00."
 
       it {
-        test_account.deposit(1500)
-        test_account.withdraw(500)
+        allow(test_terminal).to receive(:display_balance).and_return "Account balance: £1000.00."
+
         expect(test_account.see_balance).to eq expected_output
       }
     end

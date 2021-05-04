@@ -12,7 +12,7 @@ class Account
   end
 
   def see_balance
-    "Account balance: £#{display(@balance)}."
+    @terminal.display_balance(@terminal)
   end
 
   def statement
@@ -43,10 +43,6 @@ class Account
   end
 
   private
-
-  def display(value)
-    sprintf('%.2f', value)
-  end
 
   def record_action(amount, type)
     balance_adjust = (type == "withdraw" ? amount * -1 : amount)
