@@ -56,4 +56,9 @@ describe BankTerminal do
       expect(test_terminal.display_balance(1500)).to eq expected_output
     end
   end
+
+  display '#deposit' do
+    it '' do
+    end
+  end
 end
