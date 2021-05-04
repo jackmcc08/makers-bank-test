@@ -1,6 +1,8 @@
 class Account
-  def initialize
+  def initialize(record_class = Record)
+    @date = "01/01/2012"
     @balance = 0
+    @record_class = record_class
     @records = []
   end
 
@@ -20,18 +22,19 @@ class Account
   def deposit(amount)
     return invalid_message(amount, "deposit") if input_invalid?(amount)
 
-    add_balance(amount)
+    # add_balance(amount)
+    record_action(amount, "deposit")
 
     "You have deposited £#{display(amount)}."
   end
 
   def withdraw(amount)
     return invalid_message(amount, "withdraw") if input_invalid?(amount)
-
     return "You do not have enough money in your account." if @balance < amount
 
-    @balance -= amount
-    @records << "01/01/2012 || || #{display(amount)} || #{display(@balance)}"
+    record_action(amount, "withdraw")
+    # @balance -= amount
+    # @records << "01/01/2012 || || #{display(amount)} || #{display(@balance)}"
 
     "You have withdrawn £#{display(amount)}."
   end
@@ -40,6 +43,16 @@ class Account
 
   def display(value)
     sprintf('%.2f', value)
+  end
+
+  def record_action(amount, type)
+    if type == "deposit"
+      @balance += amount
+      @records << @record_class.new(amount, type, @date, @balance)
+    elsif type == "withdraw"
+      @balance -= amount
+      @records << @record_class.new(amount, type, @date, @balance)
+    end
   end
 
   def add_balance(value)
