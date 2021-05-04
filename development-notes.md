@@ -30,6 +30,7 @@ As a client
 In order to save money
 I would like to be able to make a deposit into my account
 
+
 As a client
 In order to get money
 I would like to be able to make a withdrawal from my account
@@ -42,8 +43,42 @@ As a client
 In order to remember what I have done with my account
 I would like to be able to see my deposits and withdrawals to and from my account and on which date (date, amount, balance).
 
+As a client
+In order to save the pennys
+I would like to be able to deposit and withdraw fractions of a pound
+
+Other requirements:
+- IRB interface
+- Data stored in memory - no database
+- need some form of date advancement
+- Amounts are floats
+
 ### Domain Model
 
-Developed basic
+Developed basic domain model off the user stories above, and identified potential classes and methods.
 
-https://docs.google.com/spreadsheets/d/1AjcWln0lPN11SqrGuDqgrx5RsbHTMIJ4ty3bb10P3Rg/edit#gid=0
+https://docs.google.com/spreadsheets/d/1AjcWln0lPN11SqrGuDqgrx5RsbHTMIJ4ty3bb10P3Rg/edit?usp=sharing
+
+### Edge Cases
+
+No negative values on deposit or withdrawal
+Empty parameters are caught on entry
+Potentially something around dates
+
+### Input/Ouput Table
+
+MVP table
+
+Deposit 1500 || You have deposited £1500.00.
+Withdraw 500 || You have withdrawn £500.00.
+Deposit 50.50 || You have deposited £50.50.
+Balance || You have an account balance of £1050.50.
+
+
+### Development Plan
+
+Plan is to develop the app through TDD, working on the above user stories.
+I will work to develop the MVP initially (deposit, withdraw, balance). And then proceed to add additional features through TDD.
+
+
+1. 

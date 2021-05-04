@@ -9,6 +9,12 @@ include screenshotss
 ## Solution
 
 ## Code Structure & Dependencies
+- Ruby Version: 3.0.1
+
+#### Key Gems
+- Testing: RSPEC
+- Coverage: SimpleCov
+- Linting: Rubocop
 
 ## Improvement Ideas
 Describe the extensions you would add if you had more time.
