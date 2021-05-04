@@ -41,5 +41,28 @@ describe Account do
 
       expect(test_account.deposit(input)).to eq expected_output
     end
+
+    it 'rejects a non-numeric input amount' do
+      input = "100"
+      expected_output = "Incorrect input detected. Please deposit a positive numeric value."
+
+      expect(test_account.deposit(input)).to eq expected_output
+
+      input = ['111']
+      expect(test_account.deposit(input)).to eq expected_output
+    end
+  end
+
+  describe '#withdraw' do
+    before do
+      test_account.deposit(2000)
+    end
+
+    it 'allows you to withdraw money from your account' do
+      input = 500
+      expected_output = "You have withdrawn £500.00."
+
+      expect(test_account.withdraw(input)).to eq expected_output
+    end
   end
 end
