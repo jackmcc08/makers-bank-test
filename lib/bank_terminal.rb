@@ -1,4 +1,4 @@
-require 'account'
+require_relative 'account'
 
 class BankTerminal
   def initialize(account = Account.new)

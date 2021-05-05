@@ -1,6 +1,5 @@
 require 'date'
-require 'record'
-require 'bank_terminal'
+require_relative 'record'
 
 class Account
   def initialize(record_class = Record)

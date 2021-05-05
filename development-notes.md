@@ -99,4 +99,6 @@ Next step is to add records and dates
   - the account class will then be the model
   - the record class will then simulate a database table.
 
-- finish refactoring of terminal class to act as view/controller 
+- finish refactoring of terminal class to act as view/controller
+
+Successfully refactored terminal class and account class to conform to an MVC type model. All tests uses mocks. And have refactored significantly.
