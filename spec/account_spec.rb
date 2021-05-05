@@ -1,36 +1,34 @@
 require 'account'
 
 describe Account do
-  let(:test_account) { Account.new(test_record_class, test_terminal) }
+  let(:test_account) { Account.new(test_record_class) }
   let(:test_record) { instance_double("Record") }
   let(:test_record_class) { class_double("Record", new: test_record) }
   let(:test_terminal) { instance_double('Terminal', action_confirmation: "") }
 
   describe '#see_balance' do
     context 'starting account has £0.00 balance by default' do
-      expected_output = "Account balance: £0.00."
+      expected_output = 0
 
-      it {
-        allow(test_terminal).to receive(:display_balance).and_return "Account balance: £0.00."
-        expect(test_account.see_balance).to eq expected_output
-      }
+      it { expect(test_account.see_balance).to eq expected_output }
     end
 
     context 'after depositing £1500' do
-      expected_output = "Account balance: £1500.00."
+      expected_output = 1500
 
       it {
-        allow(test_terminal).to receive(:display_balance).and_return "Account balance: £1500.00."
-
+        test_account.deposit(1500)
+        
         expect(test_account.see_balance).to eq expected_output
       }
     end
 
     context 'after depositing £1500 and withdrawing £500' do
-      expected_output = "Account balance: £1000.00."
+      expected_output = 1000
 
       it {
-        allow(test_terminal).to receive(:display_balance).and_return "Account balance: £1000.00."
+        test_account.deposit(1500)
+        test_account.withdraw(500)
 
         expect(test_account.see_balance).to eq expected_output
       }
@@ -38,7 +36,7 @@ describe Account do
   end
 
   describe '#deposit' do
-    it 'allows you to depost a positive amount into your account' do
+    it 'allows you to deposit a positive amount into your account' do
       input = 1500.00
       expected_output = "You have deposited £1500.00."
       allow(test_terminal).to receive(:action_confirmation).and_return "You have deposited £1500.00."

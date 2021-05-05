@@ -1,4 +1,24 @@
+require 'account'
+
 class BankTerminal
+  def initialize(account = Account.new)
+    @account = account
+  end
+
+  def deposit(amount)
+    action = @account.deposit(amount)
+    if action == "test"
+      action_confirmation(amount, "deposit")
+    else
+      action
+    end
+  end
+
+  def display_balance
+    amount = @account.see_balance
+    "Account balance: £#{display(amount)}."
+  end
+
   def display_statement(records)
     result = ["date || credit || debit || balance"]
     return result[0] if records.empty?
@@ -13,10 +33,6 @@ class BankTerminal
   def action_confirmation(amount, type)
     type_display = (type == "deposit" ? "deposited" : "withdrawn")
     "You have #{type_display} £#{display(amount)}."
-  end
-
-  def display_balance(amount)
-    "Account balance: £#{display(amount)}."
   end
 
   private

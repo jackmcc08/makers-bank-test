@@ -1,7 +1,8 @@
 require 'bank_terminal'
 
 describe BankTerminal do
-  let(:test_terminal) { BankTerminal.new }
+  let(:test_terminal) { BankTerminal.new(account_double) }
+  let(:account_double) { instance_double('Account') }
   let(:test_record_1) { instance_double('Record', display_string: "01/01/2012 || 2000.00 || || 2000.00") }
   let(:test_record_2) { instance_double('Record', display_string: "01/01/2012 || || 1000.00 || 1000.00") }
 
@@ -35,6 +36,46 @@ describe BankTerminal do
     end
   end
 
+
+  describe '#display_balance' do
+    it 'starting account has £0.00 balance by default' do
+      expected_output = "Account balance: £0.00."
+      allow(account_double).to receive(:see_balance).and_return(0)
+
+      expect(test_terminal.display_balance).to eq expected_output
+    end
+
+    it 'after one deposit' do
+      expected_output = "Account balance: £1500.00."
+      allow(account_double).to receive(:see_balance).and_return(1500)
+
+      expect(test_terminal.display_balance).to eq expected_output
+    end
+
+    it 'after one deposit and one withdraw' do
+      expected_output = "Account balance: £1000.00."
+      allow(account_double).to receive(:see_balance).and_return(1000)
+
+      expect(test_terminal.display_balance).to eq expected_output
+    end
+  end
+
+  describe '#deposit' do
+    it 'allows you to deposit a positive amount into your account' do
+      input = 1500.00
+      expected_output = "You have deposited £1500.00."
+
+      expect(test_terminal.deposit(input)).to eq expected_output
+    end
+
+    it 'does not allow you to deposit a negative amount' do
+      input = -1500.00
+      expected_output = "You cannot deposit a negative amount."
+
+      expect(test_terminal.deposit(input)).to eq expected_output
+    end
+  end
+
   describe '#action_confirmation' do
     it 'provides a confirmation of deposit' do
       expected_output = "You have deposited £1000.00."
@@ -46,19 +87,6 @@ describe BankTerminal do
       expected_output = "You have withdrawn £1000.00."
 
       expect(test_terminal.action_confirmation(1000, "withdraw")).to eq expected_output
-    end
-  end
-
-  describe '#display_balance' do
-    it 'after one deposit' do
-      expected_output = "Account balance: £1500.00."
-
-      expect(test_terminal.display_balance(1500)).to eq expected_output
-    end
-  end
-
-  display '#deposit' do
-    it '' do
     end
   end
 end

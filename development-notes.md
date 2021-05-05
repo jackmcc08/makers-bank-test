@@ -98,3 +98,5 @@ Next step is to add records and dates
 - on development of terminal class, it makes sense to refactor the Account class to get the user input to be into the terminal class as this will then act as the view/controller layer.
   - the account class will then be the model
   - the record class will then simulate a database table.
+
+- finish refactoring of terminal class to act as view/controller 

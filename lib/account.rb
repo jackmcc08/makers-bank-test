@@ -3,21 +3,20 @@ require 'record'
 require 'bank_terminal'
 
 class Account
-  def initialize(record_class = Record, terminal = BankTerminal.new)
+  def initialize(record_class = Record)
     @date = Date.new(2012, 1, 1)
     @balance = 0
     @record_class = record_class
     @records = []
-    @terminal = terminal
   end
 
   def see_balance
-    @terminal.display_balance(@terminal)
+    @balance
   end
-
-  def statement
-    @terminal.display_statement(@records)
-  end
+  #
+  # def statement
+  #   @terminal.display_statement(@records)
+  # end
 
   def deposit(amount)
     type = "deposit"
@@ -25,7 +24,8 @@ class Account
 
     record_action(amount, type)
 
-    @terminal.action_confirmation(amount, type)
+    # @terminal.action_confirmation(amount, type)
+    return "test"
   end
 
   def withdraw(amount)
@@ -35,7 +35,7 @@ class Account
 
     record_action(amount, type)
 
-    @terminal.action_confirmation(amount, type)
+    # @terminal.action_confirmation(amount, type)
   end
 
   def set_date(year, month, day)
