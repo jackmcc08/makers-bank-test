@@ -70,6 +70,8 @@ describe BankTerminal do
   describe '#deposit' do
     it 'allows you to deposit a positive amount into your account' do
       input = 1500.00
+      allow(account_double).to receive(:deposit).and_return("Success")
+
       expected_output = "You have deposited £1500.00."
 
       expect(test_terminal.deposit(input)).to eq expected_output
@@ -77,8 +79,31 @@ describe BankTerminal do
 
     it 'does not allow you to deposit a negative amount' do
       input = -1500.00
+      allow(account_double).to receive(:deposit).and_return("FAIL:NEG")
+
       expected_output = "You cannot deposit a negative amount."
 
+      expect(test_terminal.deposit(input)).to eq expected_output
+    end
+
+    it 'does not allow you to deposit a zero amount' do
+      input = 0
+      allow(account_double).to receive(:deposit).and_return("FAIL:ZER")
+
+      expected_output = "You cannot deposit a zero amount."
+
+      expect(test_terminal.deposit(input)).to eq expected_output
+    end
+
+    it 'rejects a non-numeric input amount' do
+      input = "100"
+      allow(account_double).to receive(:deposit).and_return("FAIL:NAN")
+
+      expected_output = "Incorrect input detected. Please deposit a positive numeric value."
+
+      expect(test_terminal.deposit(input)).to eq expected_output
+
+      input = ['111']
       expect(test_terminal.deposit(input)).to eq expected_output
     end
   end

@@ -20,22 +20,21 @@ class Account
 
   def deposit(amount)
     type = "deposit"
-    return invalid_message(amount, type) if input_invalid?(amount, type)
+    return error_code(amount) if input_invalid?(amount, type)
 
     record_action(amount, type)
 
-    # @terminal.action_confirmation(amount, type)
-    return "test"
+    return "Success"
   end
 
   def withdraw(amount)
     type = "withdraw"
-    return invalid_message(amount, type) if input_invalid?(amount, type)
+    return error_code(amount) if input_invalid?(amount, type)
     return "You do not have enough money in your account." unless enough_balance?(amount)
 
     record_action(amount, type)
 
-    # @terminal.action_confirmation(amount, type)
+    return "Success"
   end
 
   def set_date(year, month, day)
@@ -63,10 +62,10 @@ class Account
     false
   end
 
-  def invalid_message(value, type)
-    return "Incorrect input detected. Please #{type} a positive numeric value." unless
+  def error_code(value)
+    return "FAIL:NAN" unless
     value.is_a? Numeric
-    return "You cannot #{type} a negative amount." if value.negative?
-    return "You cannot #{type} a zero amount." if value.zero?
+    return "FAIL:NEG" if value.negative?
+    return "FAIL:ZER" if value.zero?
   end
 end

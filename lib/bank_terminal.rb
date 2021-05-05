@@ -7,10 +7,10 @@ class BankTerminal
 
   def deposit(amount)
     action = @account.deposit(amount)
-    if action == "test"
+    if action == "Success"
       action_confirmation(amount, "deposit")
     else
-      action
+      error_message("deposit", action)
     end
   end
 
@@ -41,4 +41,12 @@ class BankTerminal
   def display(value)
     sprintf('%.2f', value)
   end
+
+  def error_message(type, error_code)
+    return "Incorrect input detected. Please #{type} a positive numeric value." if error_code == "FAIL:NAN"
+    return "You cannot #{type} a negative amount." if error_code == "FAIL:NEG"
+    return "You cannot #{type} a zero amount." if error_code == "FAIL:ZER"
+  end
+
+
 end
