@@ -108,7 +108,7 @@ describe Account do
 
     it 'does not allow you to withdraw money if it will take your balance negative or your account is negative' do
       input = 2500
-      expected_output = "You do not have enough money in your account."
+      expected_output = "FAIL:NEM"
 
       expect(test_account.withdraw(input)).to eq expected_output
     end

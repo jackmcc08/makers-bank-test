@@ -10,7 +10,16 @@ class BankTerminal
     if action == "Success"
       action_confirmation(amount, "deposit")
     else
-      error_message("deposit", action)
+      error_message(action, "deposit")
+    end
+  end
+
+  def withdraw(amount)
+    action = @account.withdraw(amount)
+    if action == "Success"
+      action_confirmation(amount, "withdraw")
+    else
+      error_message(action, "withdraw")
     end
   end
 
@@ -31,10 +40,7 @@ class BankTerminal
     result.join("\n")
   end
 
-  def action_confirmation(amount, type)
-    type_display = (type == "deposit" ? "deposited" : "withdrawn")
-    "You have #{type_display} £#{display(amount)}."
-  end
+
 
   private
 
@@ -42,10 +48,16 @@ class BankTerminal
     sprintf('%.2f', value)
   end
 
-  def error_message(type, error_code)
+  def action_confirmation(amount, type)
+    type_display = (type == "deposit" ? "deposited" : "withdrawn")
+    "You have #{type_display} £#{display(amount)}."
+  end
+
+  def error_message(error_code, type)
     return "Incorrect input detected. Please #{type} a positive numeric value." if error_code == "FAIL:NAN"
     return "You cannot #{type} a negative amount." if error_code == "FAIL:NEG"
     return "You cannot #{type} a zero amount." if error_code == "FAIL:ZER"
+    return "You do not have enough money in your account." if error_code == "FAIL:NEM"
   end
 
 

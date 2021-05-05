@@ -108,17 +108,53 @@ describe BankTerminal do
     end
   end
 
-  describe '#action_confirmation' do
-    it 'provides a confirmation of deposit' do
-      expected_output = "You have deposited £1000.00."
+  describe '#withdraw' do
+    it 'allows you to withdraw money from your account' do
+      input = 500
+      allow(account_double).to receive(:withdraw).and_return("Success")
 
-      expect(test_terminal.action_confirmation(1000, "deposit")).to eq expected_output
+      expected_output = "You have withdrawn £500.00."
+
+      expect(test_terminal.withdraw(input)).to eq expected_output
     end
 
-    it 'provides confirmation of withdraw' do
-      expected_output = "You have withdrawn £1000.00."
+    it 'does not allow you to withdraw money if it will take your balance negative or your account is negative' do
+      input = 2500
+      allow(account_double).to receive(:withdraw).and_return("FAIL:NEM")
 
-      expect(test_terminal.action_confirmation(1000, "withdraw")).to eq expected_output
+      expected_output = "You do not have enough money in your account."
+
+      expect(test_terminal.withdraw(input)).to eq expected_output
+    end
+
+    it 'does not allow you to withdraw a negative amount' do
+      input = -10
+      allow(account_double).to receive(:withdraw).and_return("FAIL:NEG")
+
+      expected_output = "You cannot withdraw a negative amount."
+
+      expect(test_terminal.withdraw(input)).to eq expected_output
+    end
+
+    it 'does not allow you to withdraw a zero amount' do
+      input = 0
+      allow(account_double).to receive(:withdraw).and_return("FAIL:ZER")
+
+      expected_output = "You cannot withdraw a zero amount."
+
+      expect(test_terminal.withdraw(input)).to eq expected_output
+    end
+
+    it 'rejects a non-numeric input amount' do
+      input = "100"
+      allow(account_double).to receive(:withdraw).and_return("FAIL:NAN")
+
+      expected_output = "Incorrect input detected. Please withdraw a positive numeric value."
+
+      expect(test_terminal.withdraw(input)).to eq expected_output
+
+      input = ['111']
+      expect(test_terminal.withdraw(input)).to eq expected_output
     end
   end
 end

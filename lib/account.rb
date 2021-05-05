@@ -20,7 +20,7 @@ class Account
 
   def deposit(amount)
     type = "deposit"
-    return error_code(amount) if input_invalid?(amount, type)
+    return error_code(amount, type) if input_invalid?(amount, type)
 
     record_action(amount, type)
 
@@ -29,8 +29,7 @@ class Account
 
   def withdraw(amount)
     type = "withdraw"
-    return error_code(amount) if input_invalid?(amount, type)
-    return "You do not have enough money in your account." unless enough_balance?(amount)
+    return error_code(amount, type) if input_invalid?(amount, type)
 
     record_action(amount, type)
 
@@ -50,22 +49,25 @@ class Account
     @records << @record_class.new(amount, type, @date, @balance)
   end
 
-  def enough_balance?(amount)
+  def enough_balance?(amount, type)
+    return true if type == "deposit"
     @balance >= amount
   end
 
-  def input_invalid?(value, _type)
+  def input_invalid?(value, type)
     return true unless value.is_a? Numeric
     return true if value.negative?
     return true if value.zero?
+    return true unless enough_balance?(value, type)
 
     false
   end
 
-  def error_code(value)
+  def error_code(value, type)
     return "FAIL:NAN" unless
     value.is_a? Numeric
     return "FAIL:NEG" if value.negative?
     return "FAIL:ZER" if value.zero?
+    return "FAIL:NEM" unless enough_balance?(value, type)
   end
 end
