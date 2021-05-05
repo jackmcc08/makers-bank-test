@@ -39,7 +39,7 @@ At the time of submission:
 ## Code Structure & Dependencies
 - Built with Ruby Version: 3.0.1
 
-The code is developed around a MVC type structure, with 3 classed.
+The code is developed around a MVC type structure, with 3 classes.
   - BankTerminal - acts as the view and controller - routing actions to the model
   - Account - acts as the model - performing the logic on the commands
   - Record - acts as a database table - storing each action
