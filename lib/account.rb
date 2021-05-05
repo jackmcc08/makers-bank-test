@@ -10,13 +10,13 @@ class Account
     @records = []
   end
 
-  def see_balance
+  def balance
     @balance
   end
-  #
-  # def statement
-  #   @terminal.display_statement(@records)
-  # end
+
+  def records
+    @records
+  end
 
   def deposit(amount)
     type = "deposit"

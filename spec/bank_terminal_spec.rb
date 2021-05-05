@@ -12,27 +12,34 @@ describe BankTerminal do
         test_record_1,
         test_record_2
       ]
+      allow(account_double).to receive(:records).and_return input_records
+
       statement_two =
         %{date || credit || debit || balance\n01/01/2012 || || 1000.00 || 1000.00\n01/01/2012 || 2000.00 || || 2000.00}
+      expected_output = statement_two
 
-      expect(test_terminal.display_statement(input_records)).to eq statement_two
+      expect(test_terminal.display_statement).to eq expected_output
     end
 
     it 'After one deposit' do
-      input_records = [
-        test_record_1
-      ]
+      input_records = [ test_record_1 ]
+      allow(account_double).to receive(:records).and_return input_records
+
       statement_one =
         %{date || credit || debit || balance\n01/01/2012 || 2000.00 || || 2000.00}
+      expected_output = statement_one
 
-      expect(test_terminal.display_statement(input_records)).to eq statement_one
+      expect(test_terminal.display_statement).to eq expected_output
     end
 
     it 'with no deposits or withdrawals' do
       input_records = []
-      statement_zero = "date || credit || debit || balance"
+      allow(account_double).to receive(:records).and_return input_records
 
-      expect(test_terminal.display_statement(input_records)).to eq statement_zero
+      statement_zero = "date || credit || debit || balance"
+      expected_output = statement_zero
+
+      expect(test_terminal.display_statement).to eq expected_output
     end
   end
 
@@ -40,21 +47,21 @@ describe BankTerminal do
   describe '#display_balance' do
     it 'starting account has £0.00 balance by default' do
       expected_output = "Account balance: £0.00."
-      allow(account_double).to receive(:see_balance).and_return(0)
+      allow(account_double).to receive(:balance).and_return(0)
 
       expect(test_terminal.display_balance).to eq expected_output
     end
 
     it 'after one deposit' do
       expected_output = "Account balance: £1500.00."
-      allow(account_double).to receive(:see_balance).and_return(1500)
+      allow(account_double).to receive(:balance).and_return(1500)
 
       expect(test_terminal.display_balance).to eq expected_output
     end
 
     it 'after one deposit and one withdraw' do
       expected_output = "Account balance: £1000.00."
-      allow(account_double).to receive(:see_balance).and_return(1000)
+      allow(account_double).to receive(:balance).and_return(1000)
 
       expect(test_terminal.display_balance).to eq expected_output
     end

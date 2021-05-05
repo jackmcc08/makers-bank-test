@@ -15,11 +15,12 @@ class BankTerminal
   end
 
   def display_balance
-    amount = @account.see_balance
+    amount = @account.balance
     "Account balance: £#{display(amount)}."
   end
 
-  def display_statement(records)
+  def display_statement
+    records = @account.records
     result = ["date || credit || debit || balance"]
     return result[0] if records.empty?
 
