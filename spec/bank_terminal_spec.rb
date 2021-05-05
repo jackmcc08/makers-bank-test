@@ -22,7 +22,7 @@ describe BankTerminal do
     end
 
     it 'After one deposit' do
-      input_records = [ test_record_1 ]
+      input_records = [test_record_1]
       allow(account_double).to receive(:records).and_return input_records
 
       statement_one =
@@ -42,7 +42,6 @@ describe BankTerminal do
       expect(test_terminal.display_statement).to eq expected_output
     end
   end
-
 
   describe '#display_balance' do
     it 'starting account has £0.00 balance by default' do
@@ -155,6 +154,25 @@ describe BankTerminal do
 
       input = ['111']
       expect(test_terminal.withdraw(input)).to eq expected_output
+    end
+  end
+
+  describe '#set_date' do
+    it 'sets the date on the account' do
+      allow(account_double).to receive(:set_date).and_return(Date.new(2012, 1, 1))
+
+      expect(test_terminal.set_date(2012, 1, 1)).to be_instance_of Date
+    end
+
+    it 'does not allow incorrect date inputs setting' do
+      expected_output = "Year must be an 4 digit integer."
+      expect(test_terminal.set_date(12, 1, 1)).to eq expected_output
+
+      expected_output = "Month must be a 1 or 2 digit integer."
+      expect(test_terminal.set_date(2012, 111, 1)).to eq expected_output
+
+      expected_output = "Day must be a 1 or 2 digit integer."
+      expect(test_terminal.set_date(2012, 1, 111)).to eq expected_output
     end
   end
 end

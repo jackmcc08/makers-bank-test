@@ -8,15 +8,15 @@ class Record
 
   def display_string
     amount = (@type == "deposit" ?
-      " #{display(@amount)} || " :
-      " || #{display(@amount)} ")
+      " #{format(@amount)} || " :
+      " || #{format(@amount)} ")
 
-    "#{date_format(@date)} ||#{amount}|| #{display(@balance)}"
+    "#{date_format(@date)} ||#{amount}|| #{format(@balance)}"
   end
 
   private
 
-  def display(value)
+  def format(value)
     sprintf('%.2f', value)
   end
 

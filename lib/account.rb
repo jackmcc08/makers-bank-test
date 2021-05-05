@@ -10,20 +10,13 @@ class Account
     @records = []
   end
 
-  def balance
-    @balance
-  end
-
-  def records
-    @records
-  end
+  attr_reader :balance, :records
 
   def deposit(amount)
     type = "deposit"
     return error_code(amount, type) if input_invalid?(amount, type)
 
     record_action(amount, type)
-
     return "Success"
   end
 
@@ -32,7 +25,6 @@ class Account
     return error_code(amount, type) if input_invalid?(amount, type)
 
     record_action(amount, type)
-
     return "Success"
   end
 
@@ -51,6 +43,7 @@ class Account
 
   def enough_balance?(amount, type)
     return true if type == "deposit"
+
     @balance >= amount
   end
 
