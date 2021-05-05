@@ -2,11 +2,13 @@
 include screenshotss
 ## Makers Academy, Week 10, Tech Test Practice - Bank Tech Test
 
-## Summary
-
 ## To Use
 - git clone the repo to your machine
-- run in your command line: `bundle install`
+- run in command line: `bundle install`
+- to run tests, enter in command line: `bundle exec rspec`
+- to check linter, enter in command line: `rubocop`
+
+**To use Program**
 - run irb in your command line: `irb -r './app.rb'`
 - this autoloads the file and creates a user account - `USER`
 - you can create your own variable name with `variable = BankTerminal.new`
@@ -16,7 +18,7 @@ Methods you can use with `USER`:
 - `.withdraw(1000)` - withdraw cash from your account - you need more money in your account than you are withdrawing
 - `.set_date(2012, 12, 31)` - set the date on your account (year, month, day) - to adjust the date of your deposit and withdrawals
 - `.display_balance` - displays your current balance
-- `.display_statement` - displays your statement with all your actions, in reverse order.
+- `.display_statement` - displays your statement with all your actions, in reverse order - *note that you need to `puts` this method in order to see it nicely formatted*.
 
 ## Solution
 I developed the solution using TDD. Where I built up the account class, and slowly factored in edge cases and error cases.
@@ -24,6 +26,12 @@ I developed the solution using TDD. Where I built up the account class, and slow
 I also extracted two additional classes - Record and BankTerminal to perform specific actions as explained below and to SRP the account class.
 
 In developing the BankTerminal class, I realised it would be better to have that class as the interface point for the user. So I refactored the account class into a model layer and added in the user interface actions previously in the account class into the Bank Terminal Class.
+
+I did this to make the code easier to understand with simpler routing, and to structure the code in accordance with SRP, so account was not responsible for processing actions and also displaying ouput to the user.
+
+At the time of submission:
+- no rubocop error
+- all tests passed and 100% coverage
 
 ## Code Structure & Dependencies
 - Built with Ruby Version: 3.0.1

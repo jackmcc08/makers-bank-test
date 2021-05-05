@@ -1,3 +1,3 @@
-require_relative './lib/bank_terminal.rb'
+require_relative './lib/bank_terminal'
 
 USER = BankTerminal.new
