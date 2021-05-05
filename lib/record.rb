@@ -1,3 +1,5 @@
+require_relative 'formatter_module'
+
 class Record
   def initialize(amount, type, date, balance)
     @amount = amount
@@ -5,6 +7,8 @@ class Record
     @date = date
     @balance = balance
   end
+
+  include Formatter
 
   def display_string
     amount = (@type == "deposit" ?
@@ -15,10 +19,6 @@ class Record
   end
 
   private
-
-  def format(value)
-    sprintf('%.2f', value)
-  end
 
   def date_format(date)
     date.strftime("%d/%m/%Y")

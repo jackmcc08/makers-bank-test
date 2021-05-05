@@ -1,5 +1,6 @@
 require 'date'
 require_relative 'record'
+require_relative 'error_module'
 
 class Account
   def initialize(record_class = Record)
@@ -10,6 +11,8 @@ class Account
   end
 
   attr_reader :balance, :records
+
+  include ErrorManager
 
   def deposit(amount, type = "deposit")
     error_code = input_invalid(amount, type)
@@ -38,20 +41,5 @@ class Account
     @balance += balance_adjust
 
     @records << @record_class.new(amount, type, @date, @balance)
-  end
-
-  def enough_balance?(amount, type)
-    return true if type == "deposit"
-
-    @balance >= amount
-  end
-
-  def input_invalid(value, type)
-    return "FAIL:NAN" unless value.is_a? Numeric
-    return "FAIL:NEG" if value.negative?
-    return "FAIL:ZER" if value.zero?
-    return "FAIL:NEM" unless enough_balance?(value, type)
-
-    false
   end
 end
