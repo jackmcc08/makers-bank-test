@@ -102,3 +102,5 @@ Next step is to add records and dates
 - finish refactoring of terminal class to act as view/controller
 
 Successfully refactored terminal class and account class to conform to an MVC type model. All tests uses mocks. And have refactored significantly.
+
+After doing the self review, I created a module for managing error checking and messaging, in an effore to bring down the size of the accounts and terminal classes.

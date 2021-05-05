@@ -20,6 +20,8 @@ Methods you can use with `USER`:
 - `.display_balance` - displays your current balance
 - `.display_statement` - displays your statement with all your actions, in reverse order - *note that you need to `puts` this method in order to see it nicely formatted*.
 
+![screenshot](./IRB_demo_screenshot.png)
+
 ## Solution
 I developed the solution using TDD. Where I built up the account class, and slowly factored in edge cases and error cases.
 
@@ -29,8 +31,10 @@ In developing the BankTerminal class, I realised it would be better to have that
 
 I did this to make the code easier to understand with simpler routing, and to structure the code in accordance with SRP, so account was not responsible for processing actions and also displaying ouput to the user.
 
+Following the code self review, I moved the error messaging and error checking out to an error manager module in an effort to make the account and terminal classes smaller and more direct.
+
 At the time of submission:
-- no rubocop error
+- no rubocop error - except BankTerminal class over 30 lines.
 - all tests passed and 100% coverage
 
 ## Code Structure & Dependencies
