@@ -14,7 +14,8 @@ class Account
 
   def deposit(amount)
     type = "deposit"
-    return error_code(amount, type) if input_invalid?(amount, type)
+    error_code = input_invalid(amount, type)
+    return error_code if error_code
 
     record_action(amount, type)
     return "Success"
@@ -22,7 +23,8 @@ class Account
 
   def withdraw(amount)
     type = "withdraw"
-    return error_code(amount, type) if input_invalid?(amount, type)
+    error_code = input_invalid(amount, type)
+    return error_code if error_code
 
     record_action(amount, type)
     return "Success"
@@ -47,20 +49,12 @@ class Account
     @balance >= amount
   end
 
-  def input_invalid?(value, type)
-    return true unless value.is_a? Numeric
-    return true if value.negative?
-    return true if value.zero?
-    return true unless enough_balance?(value, type)
-
-    false
-  end
-
-  def error_code(value, type)
-    return "FAIL:NAN" unless
-    value.is_a? Numeric
+  def input_invalid(value, type)
+    return "FAIL:NAN" unless value.is_a? Numeric
     return "FAIL:NEG" if value.negative?
     return "FAIL:ZER" if value.zero?
     return "FAIL:NEM" unless enough_balance?(value, type)
+
+    false
   end
 end
