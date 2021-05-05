@@ -98,7 +98,7 @@ describe BankTerminal do
       input = "100"
       allow(account_double).to receive(:deposit).and_return("FAIL:NAN")
 
-      expected_output = "Incorrect input detected. Please deposit a positive numeric value."
+      expected_output = "Incorrect input detected. Please deposit a numeric value."
 
       expect(test_terminal.deposit(input)).to eq expected_output
 
@@ -148,7 +148,7 @@ describe BankTerminal do
       input = "100"
       allow(account_double).to receive(:withdraw).and_return("FAIL:NAN")
 
-      expected_output = "Incorrect input detected. Please withdraw a positive numeric value."
+      expected_output = "Incorrect input detected. Please withdraw a numeric value."
 
       expect(test_terminal.withdraw(input)).to eq expected_output
 

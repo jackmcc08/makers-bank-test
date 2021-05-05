@@ -46,12 +46,24 @@ Layout/LineLength:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-  Max: 100
+  Max: 80
 
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+  Max: 5
+
+Metrics/ClassLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+  Max: 30
 
 # Code Style
 # ==========
