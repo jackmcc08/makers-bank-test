@@ -14,7 +14,8 @@ class Account
 
   include ErrorManager
 
-  def deposit(amount, type = "deposit")
+  def deposit(amount)
+    type = "deposit"
     error_code = input_invalid(amount, type)
     return error_code if error_code
 
@@ -22,7 +23,8 @@ class Account
     return "Success"
   end
 
-  def withdraw(amount, type = "withdraw")
+  def withdraw(amount)
+    type = "withdraw"
     error_code = input_invalid(amount, type)
     return error_code if error_code
 

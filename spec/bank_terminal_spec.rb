@@ -4,9 +4,11 @@ describe BankTerminal do
   let(:test_terminal) { BankTerminal.new(account_double) }
   let(:account_double) { instance_double('Account') }
   let(:test_record_1) { instance_double('Record',
-    type: "deposit", amount: 2000, date: Date.new(2012,1,1), balance: 2000) }
+                                        type: "deposit", amount: 2000, date: Date.new(2012, 1, 1), balance: 2000)
+  }  
   let(:test_record_2) { instance_double('Record',
-    type: "withdraw", amount: 1000, date: Date.new(2012,1,1), balance: 1000) }
+                                        type: "withdraw", amount: 1000, date: Date.new(2012, 1, 1), balance: 1000)
+  }  
 
   describe '#display_statement' do
     it 'After one deposit and one withdrawal' do
