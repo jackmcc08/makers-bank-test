@@ -31,7 +31,7 @@ class BankTerminal
     records = @account.records
     result = ["date || credit || debit || balance"]
 
-    records.reverse.each { |entry| result.push(entry.display_string) }
+    records.reverse.each { |record| result.push(display_string(record)) }
 
     result.join("\n")
   end
@@ -48,5 +48,13 @@ class BankTerminal
   def action_confirmation(amount, type)
     type_display = (type == "deposit" ? "deposited" : "withdrawn")
     "You have #{type_display} £#{format(amount)}."
+  end
+
+  def display_string(record)
+    amount = (record.type == "deposit" ?
+      " #{format(record.amount)} || " :
+      " || #{format(record.amount)} ")
+
+    "#{date_format(record.date)} ||#{amount}|| #{format(record.balance)}"
   end
 end

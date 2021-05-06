@@ -17,18 +17,4 @@ describe Record do
       expect(@test_record).to be_instance_of Record
     end
   end
-
-  describe '#display_record' do
-    it 'provides a string for display in the statement for deposits' do
-      expected_output = "01/01/2012 || 1000.00 || || 1000.00"
-
-      expect(@test_record.display_string).to eq expected_output
-    end
-
-    it 'provides a string for display in the statement for withdrawals' do
-      expected_output = "01/01/2012 || || 1000.00 || 1000.00"
-
-      expect(@test_record_2.display_string).to eq expected_output
-    end
-  end
 end

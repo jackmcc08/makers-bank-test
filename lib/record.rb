@@ -8,13 +8,6 @@ class Record
     @balance = balance
   end
 
-  include Formatter
+  attr_reader :amount, :type, :date, :balance
 
-  def display_string
-    amount = (@type == "deposit" ?
-      " #{format(@amount)} || " :
-      " || #{format(@amount)} ")
-
-    "#{date_format(@date)} ||#{amount}|| #{format(@balance)}"
-  end
 end
