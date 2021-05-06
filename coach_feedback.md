@@ -26,7 +26,8 @@ Object-oriented design
 - [x] You shouldn’t need to store the balance separately in an instance variable. It duplicates state since you’re already storing balances in each transaction. Duplicating state can easily lead to bugs creeping in where the different values go out of sync.
   - refactored out the \@balance instance variable. Instead current balance is read off the last record stored.
 
-- [ ] You’ve used error codes and strings to flag when something goes wrong. That works but is more cumbersome and hard to follow than using exceptions, which is the more common approach to reacting to invalid states/inputs. Exceptions automatically interrupt execution and can be caught if you want to perform specific actions in response to an exception: https://rollbar.com/guides/ruby-raising-exceptions/, https://www.rubyguides.com/2019/06/ruby-rescue-exceptions/.
+- [x] You’ve used error codes and strings to flag when something goes wrong. That works but is more cumbersome and hard to follow than using exceptions, which is the more common approach to reacting to invalid states/inputs. Exceptions automatically interrupt execution and can be caught if you want to perform specific actions in response to an exception: https://rollbar.com/guides/ruby-raising-exceptions/, https://www.rubyguides.com/2019/06/ruby-rescue-exceptions/.
+  - **Implemented exception coding, allowed me to cut down the error messaging code and refactor the code a bit more. I put the invalid inputs catcher in the bank terminal class, while the error catcher for too little balance is in the account class.**
 
 Testing
 - Good use of mocks in your tests :)
