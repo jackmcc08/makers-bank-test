@@ -1,10 +1,10 @@
 require_relative 'formatter_module'
 
 class Record
-  def initialize(amount, type, date, balance)
+  def initialize(amount, type, balance)
     @amount = amount
     @type = type
-    @date = date
+    @timestamp = Time.now
     @balance = balance
   end
 
