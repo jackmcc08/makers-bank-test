@@ -1,6 +1,9 @@
 # makers-bank-test
 ## Makers Academy, Week 10, Tech Test Practice - Bank Tech Test - RUBY
 
+https://github.com/makersacademy/course/tree/master/individual_challenges
+https://github.com/makersacademy/course/blob/master/individual_challenges/bank_tech_test.md
+
 ## To Use
 - git clone the repo to your machine
 - run in command line: `bundle install`
