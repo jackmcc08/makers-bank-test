@@ -3,7 +3,12 @@ require 'account'
 describe Account do
   let(:test_account) { Account.new(test_record_class) }
   let(:test_record) { instance_double("Record") }
-  let(:test_record_class) { class_double("Record", new: test_record) }
+  let(:test_record_2) { instance_double("Record") }
+  let(:test_record_class) { class_double("Record") }
+
+  before do
+    allow(test_record_class).to receive(:new).and_return(test_record, test_record_2)
+  end
 
   describe '#balance' do
     context 'starting account has £0.00 balance by default' do
@@ -28,19 +33,31 @@ describe Account do
 
       it {
         test_account.deposit(1500)
-        allow(test_record).to receive(:balance).and_return(1500, 1000)
+        allow(test_record).to receive(:balance).and_return(1500)
         test_account.withdraw(500)
+        allow(test_record_2).to receive(:balance).and_return(1000)
 
         expect(test_account.balance).to eq expected_output
       }
     end
   end
 
-  describe '#records' do
+  describe '#records_for_statement' do
+    it 'provides the records data in the correct logic for the statement' do
+      test_account.deposit(1500)
+      allow(test_record).to receive(:balance).and_return(1500)
+      test_account.deposit(1500)
+      expected_output = [test_record_2, test_record]
+
+      expect(test_account.records_for_statement).to eq expected_output
+    end
+  end
+
+  describe '#records_for_statement' do
     context 'with no deposits or withdrawals' do
       expected_output = []
 
-      it { expect(test_account.records).to eq expected_output }
+      it { expect(test_account.records_for_statement).to eq expected_output }
     end
 
     context 'After one deposit' do
@@ -48,18 +65,18 @@ describe Account do
         expected_output = [test_record]
         test_account.deposit(1500)
 
-        expect(test_account.records).to eq expected_output
+        expect(test_account.records_for_statement).to eq expected_output
       }
     end
 
     context 'After one deposit and one withdrawal' do
       it {
-        expected_output = [test_record, test_record]
+        expected_output = [test_record_2, test_record]
         test_account.deposit(1500)
         allow(test_record).to receive(:balance).and_return(1500)
         test_account.withdraw(500)
 
-        expect(test_account.records).to eq expected_output
+        expect(test_account.records_for_statement).to eq expected_output
       }
     end
   end
@@ -141,10 +158,4 @@ describe Account do
       expect(test_account.withdraw(input)).to eq expected_output
     end
   end
-  # 
-  # describe '#set_date' do
-  #   it 'sets the date on the account' do
-  #     expect(test_account.set_date(2012, 1, 1)).to be_instance_of Date
-  #   end
-  # end
 end

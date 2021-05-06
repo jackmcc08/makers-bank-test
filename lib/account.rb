@@ -4,17 +4,18 @@ require_relative 'error_module'
 
 class Account
   def initialize(record_class = Record)
-    # @date = Date.new(2012, 1, 1)
     @record_class = record_class
     @records = []
   end
-
-  attr_reader :records
 
   include ErrorManager
 
   def balance
     @records.empty? ? 0 : @records.last.balance
+  end
+
+  def records_for_statement
+    @records.reverse
   end
 
   def deposit(amount)
@@ -34,10 +35,6 @@ class Account
     record_action(amount, type)
     return "Success"
   end
-
-  # def set_date(year, month, day)
-  #   @date = Date.new(year, month, day)
-  # end
 
   private
 

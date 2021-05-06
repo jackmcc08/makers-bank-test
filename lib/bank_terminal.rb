@@ -28,19 +28,8 @@ class BankTerminal
   end
 
   def display_statement
-    result = ["date || credit || debit || balance"]
-
-    @account.records.reverse.each { |record| result << statement_format(record) }
-
-    result.join("\n")
+    statement_format(@account.records_for_statement)
   end
-
-  # def set_date(year, month, day)
-  #   check = date_error(year, month, day)
-  #   return date_error_message(check) if check
-  #
-  #   @account.set_date(year, month, day)
-  # end
 
   private
 

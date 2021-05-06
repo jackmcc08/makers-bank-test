@@ -13,10 +13,10 @@ describe BankTerminal do
   describe '#display_statement' do
     it 'After one deposit and one withdrawal' do
       input_records = [
-        test_record_1,
-        test_record_2
+        test_record_2,
+        test_record_1
       ]
-      allow(account_double).to receive(:records).and_return input_records
+      allow(account_double).to receive(:records_for_statement).and_return input_records
 
       statement_two =
         "date || credit || debit || balance\n"\
@@ -29,7 +29,7 @@ describe BankTerminal do
 
     it 'After one deposit' do
       input_records = [test_record_1]
-      allow(account_double).to receive(:records).and_return input_records
+      allow(account_double).to receive(:records_for_statement).and_return input_records
 
       statement_one =
         "date || credit || debit || balance\n"\
@@ -41,7 +41,7 @@ describe BankTerminal do
 
     it 'with no deposits or withdrawals' do
       input_records = []
-      allow(account_double).to receive(:records).and_return input_records
+      allow(account_double).to receive(:records_for_statement).and_return input_records
 
       statement_zero = "date || credit || debit || balance"
       expected_output = statement_zero

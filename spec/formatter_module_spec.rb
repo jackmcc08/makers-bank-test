@@ -25,11 +25,21 @@ describe Formatter do
   end
 
   describe '#statement_format' do
+    it 'formats and constructs statement string' do
+      input = [test_record_1]
+      expected_output = "date || credit || debit || balance\n"\
+      "01/01/2012 || 2000.00 || || 2000.00"
+
+      expect(statement_format(input)).to eq expected_output
+    end
+  end
+
+  describe '#record_format' do
     it 'formats a record object suitable for the bank statement' do
       input = test_record_1
       expected_output = "01/01/2012 || 2000.00 || || 2000.00"
 
-      expect(statement_format(input)).to eq expected_output
+      expect(record_format(input)).to eq expected_output
     end
   end
  end
