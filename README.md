@@ -32,6 +32,11 @@ I did this to make the code easier to understand with simpler routing, and to st
 
 Following the code self review, I moved the error messaging and error checking out to an error manager module in an effort to make the account and terminal classes smaller and more direct.
 
+Edge cases built:
+- Overdrafts not allowed - made this assumption as users should not be allowed to go into debt unknowingly and without agreeing terms.
+- Did not allow negative or zero deposits and withdrawals as this would have strange effects on the account and not match with a common understanding of the terms deposit or withdraw.
+- Only allowed numeric values e.g. integer and floats to be entered into deposit and withdraw, to make it easier to handle information and not have to make code to handle strange entries.
+
 At the time of submission:
 - no rubocop error - except BankTerminal class over 30 lines.
 - all tests passed and 100% coverage
