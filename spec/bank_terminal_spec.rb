@@ -5,10 +5,10 @@ describe BankTerminal do
   let(:account_double) { instance_double('Account') }
   let(:test_record_1) { instance_double('Record',
                                         type: "deposit", amount: 2000, date: Date.new(2012, 1, 1), balance: 2000)
-  }  
+  }
   let(:test_record_2) { instance_double('Record',
                                         type: "withdraw", amount: 1000, date: Date.new(2012, 1, 1), balance: 1000)
-  }  
+  }
 
   describe '#display_statement' do
     it 'After one deposit and one withdrawal' do
@@ -19,7 +19,9 @@ describe BankTerminal do
       allow(account_double).to receive(:records).and_return input_records
 
       statement_two =
-        %{date || credit || debit || balance\n01/01/2012 || || 1000.00 || 1000.00\n01/01/2012 || 2000.00 || || 2000.00}
+        "date || credit || debit || balance\n"\
+        "01/01/2012 || || 1000.00 || 1000.00\n"\
+        "01/01/2012 || 2000.00 || || 2000.00"
       expected_output = statement_two
 
       expect(test_terminal.display_statement).to eq expected_output
@@ -30,7 +32,8 @@ describe BankTerminal do
       allow(account_double).to receive(:records).and_return input_records
 
       statement_one =
-        %{date || credit || debit || balance\n01/01/2012 || 2000.00 || || 2000.00}
+        "date || credit || debit || balance\n"\
+        "01/01/2012 || 2000.00 || || 2000.00"
       expected_output = statement_one
 
       expect(test_terminal.display_statement).to eq expected_output
