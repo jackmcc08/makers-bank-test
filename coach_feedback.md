@@ -15,6 +15,7 @@ Object-oriented design
 - [x] Having a Record class that knows how to format itself is a neat solution.  The trade-off with that solution though is that you’ve mixed the concerns of storing transaction data and formatting it. If in the future you needed to be able to format a statement in two different ways, you’d have to have two different Record classes and store your transaction data twice.
   - **taken on board have moved this method into BankTerminal class**
 - [ ] Another drawback is that your BankTerminal class also does some statement formatting at the moment inside display_statement, so your Record and BankTerminal classes are actually quite tightly coupled. How could you separate the concern of formatting/printing statement more neatly from the concerns of performing deposits/withdrawals and the concern of keeping track of transaction data?
+
 - [x] Is there a reason why your Account.deposit and Account.withdraw methods need a type argument? Would you ever pass in anything other than "deposit" into the deposit method? Removing this argument would remove a potential source of invalid user inputs.
   - **this was implemented to save on lines in the code, but have changed it back, as the potential for error's make sense.**
 

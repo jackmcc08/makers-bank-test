@@ -31,7 +31,6 @@ describe Account do
         allow(test_record).to receive(:balance).and_return(1500, 1000)
         test_account.withdraw(500)
 
-
         expect(test_account.balance).to eq expected_output
       }
     end
