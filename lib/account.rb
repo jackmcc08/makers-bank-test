@@ -4,7 +4,7 @@ require_relative 'error_module'
 
 class Account
   def initialize(record_class = Record)
-    @date = Date.new(2012, 1, 1)
+    # @date = Date.new(2012, 1, 1)
     @record_class = record_class
     @records = []
   end
@@ -35,9 +35,9 @@ class Account
     return "Success"
   end
 
-  def set_date(year, month, day)
-    @date = Date.new(year, month, day)
-  end
+  # def set_date(year, month, day)
+  #   @date = Date.new(year, month, day)
+  # end
 
   private
 
@@ -45,6 +45,6 @@ class Account
     balance_adjust = (type == "withdraw" ? amount * -1 : amount)
     current_balance = balance + balance_adjust
 
-    @records << @record_class.new(amount, type, @date, current_balance)
+    @records << @record_class.new(amount, type, current_balance)
   end
 end
