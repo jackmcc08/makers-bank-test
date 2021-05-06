@@ -44,6 +44,9 @@ At the time of submission:
 - no rubocop error - except BankTerminal class over 30 lines.
 - all tests passed and 100% coverage
 
+**Post Coach Feedback**
+Following initial coach review I refactored the code and made changes as outlined in the coach_feedback.md [file](https://github.com/jackmcc08/makers-bank-test/blob/main/coach_feedback.md).
+
 ## Code Structure & Dependencies
 - Built with Ruby Version: 3.0.1
 

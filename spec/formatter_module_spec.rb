@@ -2,7 +2,8 @@ require 'formatter_module'
 
 describe Formatter do
   let(:test_record_1) { instance_double('Record',
-                                        type: "deposit", amount: 2000, timestamp: Time.new(2012, 1, 1), balance: 2000) }
+                                        type: "deposit", amount: 2000, timestamp: Time.new(2012, 1, 1), balance: 2000)
+  }  
 
   include Formatter
 
@@ -42,4 +43,4 @@ describe Formatter do
       expect(record_format(input)).to eq expected_output
     end
   end
- end
+end
