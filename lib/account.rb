@@ -19,21 +19,12 @@ class Account
   end
 
   def deposit(amount)
-    type = "deposit"
-    error_code = input_invalid(amount, type)
-    return error_code if error_code
-
-    record_action(amount, type)
-    return "Success"
+    record_action(amount, "deposit")
   end
 
   def withdraw(amount)
-    type = "withdraw"
-    error_code = input_invalid(amount, type)
-    return error_code if error_code
-
-    record_action(amount, type)
-    return "Success"
+    check_balance(amount)
+    record_action(amount, "withdraw")
   end
 
   private
@@ -41,7 +32,8 @@ class Account
   def record_action(amount, type)
     balance_adjust = (type == "withdraw" ? amount * -1 : amount)
     current_balance = balance + balance_adjust
-
-    @records << @record_class.new(amount, type, current_balance)
+    record = @record_class.new(amount, type, current_balance)
+    @records << record
+    record
   end
 end

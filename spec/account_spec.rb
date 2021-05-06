@@ -84,32 +84,8 @@ describe Account do
   describe '#deposit' do
     it 'allows you to deposit a positive amount into your account' do
       input = 1500.00
-      expected_output = "Success"
+      expected_output = test_record
 
-      expect(test_account.deposit(input)).to eq expected_output
-    end
-
-    it 'does not allow you to deposit a negative amount' do
-      input = -1500.00
-      expected_output = "FAIL:NEG"
-
-      expect(test_account.deposit(input)).to eq expected_output
-    end
-
-    it 'does not allow you to deposit a zero amount' do
-      input = 0
-      expected_output = "FAIL:ZER"
-
-      expect(test_account.deposit(input)).to eq expected_output
-    end
-
-    it 'rejects a non-numeric input amount' do
-      input = "100"
-      expected_output = "FAIL:NAN"
-
-      expect(test_account.deposit(input)).to eq expected_output
-
-      input = ['111']
       expect(test_account.deposit(input)).to eq expected_output
     end
   end
@@ -122,40 +98,16 @@ describe Account do
 
     it 'allows you to withdraw money from your account' do
       input = 500
-      expected_output = "Success"
+      expected_output = test_record_2
 
       expect(test_account.withdraw(input)).to eq expected_output
     end
 
     it 'does not allow you to withdraw money if it will take your balance negative or your account is negative' do
       input = 2500
-      expected_output = "FAIL:NEM"
+      expected_output = "You do not have enough money in your account."
 
-      expect(test_account.withdraw(input)).to eq expected_output
-    end
-
-    it 'does not allow you to withdraw a negative amount' do
-      input = -10
-      expected_output = "FAIL:NEG"
-
-      expect(test_account.withdraw(input)).to eq expected_output
-    end
-
-    it 'does not allow you to withdraw a zero amount' do
-      input = 0
-      expected_output = "FAIL:ZER"
-
-      expect(test_account.withdraw(input)).to eq expected_output
-    end
-
-    it 'rejects a non-numeric input amount' do
-      input = "100"
-      expected_output = "FAIL:NAN"
-
-      expect(test_account.withdraw(input)).to eq expected_output
-
-      input = ['111']
-      expect(test_account.withdraw(input)).to eq expected_output
+      expect { test_account.withdraw(input) }.to raise_error  expected_output
     end
   end
 end

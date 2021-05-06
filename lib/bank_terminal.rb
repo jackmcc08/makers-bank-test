@@ -10,17 +10,17 @@ class BankTerminal
   include ErrorManager, Formatter
 
   def deposit(amount)
-    action = @account.deposit(amount)
-    return action_confirmation(amount, "deposit") if action == "Success"
+    validate_input(amount, "deposit")
 
-    input_error_message(action, "deposit")
+    @account.deposit(amount)
+    action_confirmation(amount, "deposit")
   end
 
   def withdraw(amount)
-    action = @account.withdraw(amount)
-    return action_confirmation(amount, "withdraw") if action == "Success"
+    validate_input(amount, "withdraw")
 
-    input_error_message(action, "withdraw")
+    @account.withdraw(amount)
+    action_confirmation(amount, "withdraw")
   end
 
   def display_balance

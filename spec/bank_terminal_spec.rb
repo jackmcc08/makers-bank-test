@@ -76,7 +76,7 @@ describe BankTerminal do
   describe '#deposit' do
     it 'allows you to deposit a positive amount into your account' do
       input = 1500.00
-      allow(account_double).to receive(:deposit).and_return("Success")
+      allow(account_double).to receive(:deposit)
 
       expected_output = "You have deposited £1500.00."
 
@@ -85,101 +85,61 @@ describe BankTerminal do
 
     it 'does not allow you to deposit a negative amount' do
       input = -1500.00
-      allow(account_double).to receive(:deposit).and_return("FAIL:NEG")
-
       expected_output = "You cannot deposit a negative amount."
 
-      expect(test_terminal.deposit(input)).to eq expected_output
+      expect { test_terminal.deposit(input) }.to raise_error expected_output
     end
 
     it 'does not allow you to deposit a zero amount' do
       input = 0
-      allow(account_double).to receive(:deposit).and_return("FAIL:ZER")
-
       expected_output = "You cannot deposit a zero amount."
 
-      expect(test_terminal.deposit(input)).to eq expected_output
+      expect { test_terminal.deposit(input) }.to raise_error expected_output
     end
 
     it 'rejects a non-numeric input amount' do
       input = "100"
-      allow(account_double).to receive(:deposit).and_return("FAIL:NAN")
-
       expected_output = "Incorrect input detected. Please deposit a numeric value."
 
-      expect(test_terminal.deposit(input)).to eq expected_output
+      expect { test_terminal.deposit(input) }.to raise_error expected_output
 
       input = ['111']
-      expect(test_terminal.deposit(input)).to eq expected_output
+      expect { test_terminal.deposit(input) }.to raise_error expected_output
     end
   end
 
   describe '#withdraw' do
     it 'allows you to withdraw money from your account' do
       input = 500
-      allow(account_double).to receive(:withdraw).and_return("Success")
+      allow(account_double).to receive(:withdraw)
 
       expected_output = "You have withdrawn £500.00."
 
       expect(test_terminal.withdraw(input)).to eq expected_output
     end
 
-    it 'does not allow you to withdraw money if it will take your balance negative or your account is negative' do
-      input = 2500
-      allow(account_double).to receive(:withdraw).and_return("FAIL:NEM")
-
-      expected_output = "You do not have enough money in your account."
-
-      expect(test_terminal.withdraw(input)).to eq expected_output
-    end
-
     it 'does not allow you to withdraw a negative amount' do
       input = -10
-      allow(account_double).to receive(:withdraw).and_return("FAIL:NEG")
-
       expected_output = "You cannot withdraw a negative amount."
 
-      expect(test_terminal.withdraw(input)).to eq expected_output
+      expect { test_terminal.withdraw(input) }.to raise_error expected_output
     end
 
     it 'does not allow you to withdraw a zero amount' do
       input = 0
-      allow(account_double).to receive(:withdraw).and_return("FAIL:ZER")
-
       expected_output = "You cannot withdraw a zero amount."
 
-      expect(test_terminal.withdraw(input)).to eq expected_output
+      expect { test_terminal.withdraw(input) }.to raise_error expected_output
     end
 
     it 'rejects a non-numeric input amount' do
       input = "100"
-      allow(account_double).to receive(:withdraw).and_return("FAIL:NAN")
-
       expected_output = "Incorrect input detected. Please withdraw a numeric value."
 
-      expect(test_terminal.withdraw(input)).to eq expected_output
+      expect { test_terminal.withdraw(input) }.to raise_error expected_output
 
       input = ['111']
-      expect(test_terminal.withdraw(input)).to eq expected_output
+      expect { test_terminal.withdraw(input) }.to raise_error expected_output
     end
   end
-
-  # describe '#set_date' do
-  #   it 'sets the date on the account' do
-  #     allow(account_double).to receive(:set_date).and_return(Date.new(2012, 1, 1))
-  #
-  #     expect(test_terminal.set_date(2012, 1, 1)).to be_instance_of Date
-  #   end
-  #
-  #   it 'does not allow incorrect date inputs setting' do
-  #     expected_output = "Year must be an 4 digit integer."
-  #     expect(test_terminal.set_date(12, 1, 1)).to eq expected_output
-  #
-  #     expected_output = "Month must be a 1 or 2 digit integer."
-  #     expect(test_terminal.set_date(2012, 111, 1)).to eq expected_output
-  #
-  #     expected_output = "Day must be a 1 or 2 digit integer."
-  #     expect(test_terminal.set_date(2012, 1, 111)).to eq expected_output
-  #   end
-  # end
 end
