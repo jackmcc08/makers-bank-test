@@ -17,6 +17,7 @@ describe Account do
 
       it {
         test_account.deposit(1500)
+        allow(test_record).to receive(:balance).and_return(1500)
 
         expect(test_account.balance).to eq expected_output
       }
@@ -27,7 +28,9 @@ describe Account do
 
       it {
         test_account.deposit(1500)
+        allow(test_record).to receive(:balance).and_return(1500, 1000)
         test_account.withdraw(500)
+
 
         expect(test_account.balance).to eq expected_output
       }
@@ -54,6 +57,7 @@ describe Account do
       it {
         expected_output = [test_record, test_record]
         test_account.deposit(1500)
+        allow(test_record).to receive(:balance).and_return(1500)
         test_account.withdraw(500)
 
         expect(test_account.records).to eq expected_output
@@ -97,6 +101,7 @@ describe Account do
   describe '#withdraw' do
     before do
       test_account.deposit(2000)
+      allow(test_record).to receive(:balance).and_return(2000)
     end
 
     it 'allows you to withdraw money from your account' do

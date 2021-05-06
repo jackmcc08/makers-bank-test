@@ -5,14 +5,17 @@ require_relative 'error_module'
 class Account
   def initialize(record_class = Record)
     @date = Date.new(2012, 1, 1)
-    @balance = 0
     @record_class = record_class
     @records = []
   end
 
-  attr_reader :balance, :records
+  attr_reader :records
 
   include ErrorManager
+
+  def balance
+    @records.empty? ? 0 : @records.last.balance
+  end
 
   def deposit(amount)
     type = "deposit"
@@ -40,8 +43,8 @@ class Account
 
   def record_action(amount, type)
     balance_adjust = (type == "withdraw" ? amount * -1 : amount)
-    @balance += balance_adjust
+    current_balance = balance + balance_adjust
 
-    @records << @record_class.new(amount, type, @date, @balance)
+    @records << @record_class.new(amount, type, @date, current_balance)
   end
 end

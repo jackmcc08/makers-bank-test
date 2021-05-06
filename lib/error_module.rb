@@ -11,7 +11,7 @@ module ErrorManager
   def enough_balance?(amount, type)
     return true if type == "deposit"
 
-    @balance >= amount
+    balance >= amount
   end
 
   def input_error_message(code, type)
