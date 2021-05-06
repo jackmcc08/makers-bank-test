@@ -1,11 +1,13 @@
 require 'bank_terminal'
+require 'timecop'
 
 describe 'Feature Test 1' do
   context 'a user deposits £1000 and withdraws £150.50, statement' do
     it {
       user = BankTerminal.new
+      Timecop.freeze(2012, 1, 1)
       user.deposit(1000)
-      user.set_date(2012, 1, 3)
+      Timecop.freeze(2012, 1, 3)
       user.withdraw(150.50)
 
       expected_output = "date || credit || debit || balance\n"\
@@ -20,11 +22,11 @@ describe 'Feature Test 2' do
   context 'a user deposits £1000 and withdraws £150.50, statement' do
     it {
       user = BankTerminal.new
-      user.set_date(2012, 1, 10)
+      Timecop.freeze(2012, 1, 10)
       user.deposit(1000)
-      user.set_date(2012, 1, 13)
+      Timecop.freeze(2012, 1, 13)
       user.deposit(2000)
-      user.set_date(2012, 1, 14)
+      Timecop.freeze(2012, 1, 14)
       user.withdraw(500)
 
       expected_output = "date || credit || debit || balance\n"\

@@ -12,6 +12,6 @@ module Formatter
       " #{format(record.amount)} || " :
       " || #{format(record.amount)} ")
 
-    "#{date_format(record.date)} ||#{amount}|| #{format(record.balance)}"
+    "#{date_format(record.timestamp)} ||#{amount}|| #{format(record.balance)}"
   end
 end

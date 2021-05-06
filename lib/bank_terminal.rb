@@ -35,12 +35,12 @@ class BankTerminal
     result.join("\n")
   end
 
-  def set_date(year, month, day)
-    check = date_error(year, month, day)
-    return date_error_message(check) if check
-
-    @account.set_date(year, month, day)
-  end
+  # def set_date(year, month, day)
+  #   check = date_error(year, month, day)
+  #   return date_error_message(check) if check
+  #
+  #   @account.set_date(year, month, day)
+  # end
 
   private
 

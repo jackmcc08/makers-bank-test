@@ -12,4 +12,5 @@ group :development, :test do
   gem "rubocop-rspec", require: false
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
+  gem 'timecop', require: false
 end

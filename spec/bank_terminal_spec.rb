@@ -4,10 +4,10 @@ describe BankTerminal do
   let(:test_terminal) { BankTerminal.new(account_double) }
   let(:account_double) { instance_double('Account') }
   let(:test_record_1) { instance_double('Record',
-                                        type: "deposit", amount: 2000, date: Date.new(2012, 1, 1), balance: 2000)
+                                        type: "deposit", amount: 2000, timestamp: Time.new(2012, 1, 1), balance: 2000)
   }
   let(:test_record_2) { instance_double('Record',
-                                        type: "withdraw", amount: 1000, date: Date.new(2012, 1, 1), balance: 1000)
+                                        type: "withdraw", amount: 1000, timestamp: Time.new(2012, 1, 1), balance: 1000)
   }
 
   describe '#display_statement' do
@@ -164,22 +164,22 @@ describe BankTerminal do
     end
   end
 
-  describe '#set_date' do
-    it 'sets the date on the account' do
-      allow(account_double).to receive(:set_date).and_return(Date.new(2012, 1, 1))
-
-      expect(test_terminal.set_date(2012, 1, 1)).to be_instance_of Date
-    end
-
-    it 'does not allow incorrect date inputs setting' do
-      expected_output = "Year must be an 4 digit integer."
-      expect(test_terminal.set_date(12, 1, 1)).to eq expected_output
-
-      expected_output = "Month must be a 1 or 2 digit integer."
-      expect(test_terminal.set_date(2012, 111, 1)).to eq expected_output
-
-      expected_output = "Day must be a 1 or 2 digit integer."
-      expect(test_terminal.set_date(2012, 1, 111)).to eq expected_output
-    end
-  end
+  # describe '#set_date' do
+  #   it 'sets the date on the account' do
+  #     allow(account_double).to receive(:set_date).and_return(Date.new(2012, 1, 1))
+  #
+  #     expect(test_terminal.set_date(2012, 1, 1)).to be_instance_of Date
+  #   end
+  #
+  #   it 'does not allow incorrect date inputs setting' do
+  #     expected_output = "Year must be an 4 digit integer."
+  #     expect(test_terminal.set_date(12, 1, 1)).to eq expected_output
+  #
+  #     expected_output = "Month must be a 1 or 2 digit integer."
+  #     expect(test_terminal.set_date(2012, 111, 1)).to eq expected_output
+  #
+  #     expected_output = "Day must be a 1 or 2 digit integer."
+  #     expect(test_terminal.set_date(2012, 1, 111)).to eq expected_output
+  #   end
+  # end
 end

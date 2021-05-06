@@ -8,6 +8,6 @@ class Record
     @balance = balance
   end
 
-  attr_reader :amount, :type, :date, :balance
+  attr_reader :amount, :type, :timestamp, :balance
 
 end
