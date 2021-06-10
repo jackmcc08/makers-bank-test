@@ -1,30 +1,12 @@
-# makers-bank-test
+# Bank Tech Test
 ## Makers Academy, Week 10, Tech Test Practice - Bank Tech Test - RUBY
 
 https://github.com/makersacademy/course/tree/master/individual_challenges
 https://github.com/makersacademy/course/blob/master/individual_challenges/bank_tech_test.md
 
-## To Use
-- git clone the repo to your machine
-- run in command line: `bundle install`
-- to run tests, enter in command line: `bundle exec rspec`
-- to check linter, enter in command line: `rubocop`
-
-**To use Program**
-- run irb in your command line: `irb -r './app.rb'`
-- this autoloads the file and creates a user account - `USER`
-- you can create your own variable name with `variable = BankTerminal.new`
-
-Methods you can use with `USER`:
-- `.deposit(1000)` - deposit cash into your account
-- `.withdraw(1000)` - withdraw cash from your account - you need more money in your account than you are withdrawing
-- `.set_date(2012, 12, 31)` - set the date on your account (year, month, day) - to adjust the date of your deposit and withdrawals
-- `.display_balance` - displays your current balance
-- `.display_statement` - displays your statement with all your actions, in reverse order - *note that you need to `puts` this method in order to see it nicely formatted*.
-
-![screenshot](./IRB_demo_screenshot.png)
-
 ## Solution
+As part of Week 10 of the Makers Bootcamp, we were tasked with carrying out solo tech tests. This is my attempt at the Bank Tech Test. It has been updated to reflect the coaches feedback. 
+
 I developed the solution using TDD. Where I built up the account class, and slowly factored in edge cases and error cases.
 
 I also extracted two additional classes - Record and BankTerminal to perform specific actions as explained below and to SRP the account class.
@@ -46,6 +28,26 @@ At the time of submission:
 
 **Post Coach Feedback**
 Following initial coach review I refactored the code and made changes as outlined in the coach_feedback.md [file](https://github.com/jackmcc08/makers-bank-test/blob/main/coach_feedback.md).
+
+## To Use
+- git clone the repo to your machine
+- run in command line: `bundle install`
+- to run tests, enter in command line: `bundle exec rspec`
+- to check linter, enter in command line: `rubocop`
+
+**To use Program**
+- run irb in your command line: `irb -r './app.rb'`
+- this autoloads the file and creates a user account - `USER`
+- you can create your own variable name with `variable = BankTerminal.new`
+
+Methods you can use with `USER`:
+- `.deposit(1000)` - deposit cash into your account
+- `.withdraw(1000)` - withdraw cash from your account - you need more money in your account than you are withdrawing
+- `.set_date(2012, 12, 31)` - set the date on your account (year, month, day) - to adjust the date of your deposit and withdrawals
+- `.display_balance` - displays your current balance
+- `.display_statement` - displays your statement with all your actions, in reverse order - *note that you need to `puts` this method in order to see it nicely formatted*.
+
+![screenshot](./IRB_demo_screenshot.png)
 
 ## Code Structure & Dependencies
 - Built with Ruby Version: 3.0.1
